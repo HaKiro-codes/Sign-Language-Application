@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SignBridge - Sign Language Translation</title>
+  <style>
+    :root {
+      --primary: #4A6FA5;
+      --secondary: #166088;
+      --accent: #4CB5F5;
+      --light: #F5F9FF;
+      --dark: #1A2238;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: var(--light);
+      color: var(--dark);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    header {
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+    
+    .profile-icon {
+      width: 40px;
+      height: 40px;
+      background-color: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .hero {
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
+      padding: 120px 0 80px;
+    }
+    
+    .hero-content {
+      flex: 1;
+      padding-right: 40px;
+    }
+    
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: var(--dark);
+    }
+    
+    .hero p {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+    
+    .avatar-container {
+      flex: 1;
+      height: 500px;
+      background-color: rgba(200, 220, 240, 0.3);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px dashed var(--primary);
+      position: relative;
+    }
+    
+    .avatar-placeholder {
+      text-align: center;
+      color: var(--primary);
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin: 60px 0;
+    }
+    
+    .feature-card {
+      background-color: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background-color: rgba(74, 111, 165, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 30px;
+      color: var(--primary);
+    }
+    
+    .feature-card h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+    
+    .feature-card p {
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    .btn {
+      background-color: var(--primary);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      transition: background-color 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn:hover {
+      background-color: var(--secondary);
+    }
+    
+    .btn-secondary {
+      background-color: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      margin-left: 15px;
+    }
+    
+    .btn-secondary:hover {
+      background-color: var(--light);
+      color: var(--secondary);
+      border-color: var(--secondary);
+    }
+    
+    footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 60px 0 30px;
+      margin-top: 80px;
+    }
+    
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+    
+    .footer-section {
+      flex: 1;
+      margin-right: 40px;
+    }
+    
+    .footer-section h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+    
+    .footer-section ul {
+      list-style: none;
+    }
+    
+    .footer-section ul li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-section a {
+      color: #bbb;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .footer-section a:hover {
+      color: white;
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+      text-align: center;
+      color: #999;
+      font-size: 14px;
+    }
+    
+    @media (max-width: 992px) {
+      .hero {
+        flex-direction: column;
+      }
+      
+      .hero-content {
+        padding-right: 0;
+        margin-bottom: 40px;
+      }
+      
+      .avatar-container {
+        width: 100%;
+      }
+      
+      .features {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+      }
+      
+      .footer-section {
+        margin-bottom: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">SignBridge</div>
+        <div class="nav-links">
+          <a href="learn-page.html">Learn</a>
+          <a href="translate-page.html">Translate</a>
+          <a href="signbridge-about-page.html">About</a>
+        </div>
+        <div class="profile-icon">U</div>
+      </nav>
+    </div>
+  </header>
+  
+  <main>
+    <section class="hero">
+      <div class="container" style="display: flex; align-items: center;">
+        <div class="hero-content">
+          <h1>Breaking communication barriers with sign language</h1>
+          <p>SignBridge uses advanced technology to translate between sign language and spoken language in real-time, making communication accessible for everyone.</p>
+          <div>
+            <a href="#translate" class="btn">Start Translating</a>
+            <a href="#learn" class="btn btn-secondary">Learn Sign Language</a>
+          </div>
+        </div>
+        <div class="avatar-container" id="avatar-container">
+          <div class="avatar-placeholder">
+            <h2>3D Avatar</h2>
+            <p>This is where the interactive 3D avatar will be rendered using Three.js</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="container" id="translate">
+      <h2 style="text-align: center; margin-bottom: 40px; font-size: 36px;">Translation Features</h2>
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <h3>Translate Sign Language</h3>
+          <p>Our advanced computer vision technology captures and translates sign language into text in real-time.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔊</div>
+          <h3>Audio to Sign</h3>
+          <p>Convert spoken language to sign language animation displayed through our 3D avatar.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3>AR Overlay</h3>
+          <p>Overlay sign language translation on video calls or recorded lectures with our augmented reality features.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📝</div>
+          <h3>Text to Sign</h3>
+          <p>Type text and have it translated into sign language through our animated 3D avatar.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="container" id="learn" style="margin-top: 80px;">
+      <h2 style="text-align: center; margin-bottom: 40px; font-size: 36px;">Learn Sign Language</h2>
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon">📚</div>
+          <h3>Interactive Lessons</h3>
+          <p>Learn sign language through our interactive lessons designed for all levels from beginner to advanced.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h3>Sign Language Dictionary</h3>
+          <p>Browse our comprehensive dictionary with video demonstrations of signs and gestures.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>SignBridge</h3>
+          <p style="color: #bbb; margin-bottom: 20px;">Breaking communication barriers and making the world more accessible through technology.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#translate">Translate</a></li>
+            <li><a href="#learn">Learn</a></li>
+            <li><a href="#about">About Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">API Reference</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <ul>
+            <li><a href="mailto:info@signbridge.com">info@signbridge.com</a></li>
+            <li><a href="#">+1 (555) 123-4567</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 SignBridge. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Placeholder for Three.js implementation
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Ready to initialize 3D avatar with Three.js');
+      // This is where you would initialize your Three.js scene
+      // Example:
+      // const scene = new THREE.Scene();
+      // const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      // const renderer = new THREE.WebGLRenderer();
+      // renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+      // document.getElementById('avatar-container').appendChild(renderer.domElement);
+    });
+  </script>
+</body>
+</html>

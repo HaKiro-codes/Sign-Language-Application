@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - SignBridge</title>
+  <style>
+    :root {
+      --primary: #4A6FA5;
+      --secondary: #166088;
+      --accent: #4CB5F5;
+      --light: #F5F9FF;
+      --dark: #1A2238;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: var(--light);
+      color: var(--dark);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    header {
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-links a.active {
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+    }
+    
+    .profile-icon {
+      width: 40px;
+      height: 40px;
+      background-color: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .page-header {
+      padding: 140px 0 60px;
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+    }
+    
+    .page-header h1 {
+      font-size: 42px;
+      margin-bottom: 20px;
+    }
+    
+    .page-header p {
+      font-size: 18px;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    .section {
+      padding: 80px 0;
+    }
+    
+    .section-light {
+      background-color: white;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+      font-size: 36px;
+      color: var(--dark);
+    }
+    
+    .section-title:after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background-color: var(--accent);
+      margin: 15px auto 0;
+    }
+    
+    .mission-vision {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    
+    .mission, .vision {
+      flex: 1;
+      background-color: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .mission h3, .vision h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+    
+    .mission p, .vision p {
+      line-height: 1.7;
+      color: #555;
+    }
+    
+    .audience-card {
+      background-color: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      margin-bottom: 30px;
+    }
+    
+    .audience-card h3 {
+      font-size: 22px;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+    
+    .audience-card ul {
+      list-style-position: inside;
+      margin-left: 20px;
+      color: #555;
+      line-height: 1.7;
+    }
+    
+    .audience-card li {
+      margin-bottom: 10px;
+    }
+    
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    
+    .feature-box {
+      background-color: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: transform 0.3s;
+    }
+    
+    .feature-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background-color: rgba(74, 111, 165, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: var(--primary);
+    }
+    
+    .feature-box h3 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+    
+    .feature-box p {
+      color: #666;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+    
+    .tech-info {
+      display: flex;
+      gap: 40px;
+      margin-top: 50px;
+    }
+    
+    .tech-column {
+      flex: 1;
+    }
+    
+    .tech-card {
+      background-color: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      margin-bottom: 30px;
+    }
+    
+    .tech-card h3 {
+      font-size: 22px;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    
+    .tech-card h4 {
+      font-size: 18px;
+      color: var(--dark);
+      margin: 15px 0 10px;
+    }
+    
+    .tech-card ul {
+      list-style-type: disc;
+      margin-left: 20px;
+      color: #555;
+      line-height: 1.6;
+    }
+    
+    .tech-card li {
+      margin-bottom: 8px;
+    }
+    
+    .team-members {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .team-member {
+      background-color: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    
+    .team-member:hover {
+      transform: translateY(-10px);
+    }
+    
+    .member-avatar {
+      width: 120px;
+      height: 120px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 36px;
+      font-weight: bold;
+    }
+    
+    .team-member h3 {
+      font-size: 22px;
+      margin-bottom: 5px;
+      color: var(--dark);
+    }
+    
+    .team-member p {
+      color: #666;
+      margin-bottom: 15px;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .social-link {
+      width: 36px;
+      height: 36px;
+      background-color: var(--light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      text-decoration: none;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    
+    .social-link:hover {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 60px 0 30px;
+    }
+    
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+    
+    .footer-section {
+      flex: 1;
+      margin-right: 40px;
+    }
+    
+    .footer-section h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+    
+    .footer-section ul {
+      list-style: none;
+    }
+    
+    .footer-section ul li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-section a {
+      color: #bbb;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .footer-section a:hover {
+      color: white;
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+      text-align: center;
+      color: #999;
+      font-size: 14px;
+    }
+    
+    .cta-section {
+      text-align: center;
+      padding: 60px 0;
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .cta-section h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    
+    .cta-section p {
+      font-size: 18px;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+    }
+    
+    .btn {
+      background-color: white;
+      color: var(--primary);
+      padding: 12px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      transition: background-color 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn:hover {
+      background-color: var(--light);
+    }
+    
+    @media (max-width: 992px) {
+      .mission-vision {
+        flex-direction: column;
+      }
+      
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .tech-info {
+        flex-direction: column;
+      }
+      
+      .team-members {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .footer-content {
+        flex-direction: column;
+      }
+      
+      .footer-section {
+        margin-bottom: 30px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .feature-grid, .team-members {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">SignBridge</div>
+        <div class="nav-links">
+          <a href="learn-page.html">Learn</a>
+          <a href="translate-page.html">Translate</a>
+          <a href="#" class="active">About</a>
+        </div>
+        <div class="profile-icon">U</div>
+      </nav>
+    </div>
+  </header>
+  
+  <section class="page-header">
+    <div class="container">
+      <h1>About SignBridge</h1>
+      <p>Breaking communication barriers and making the world more accessible through innovative sign language technology.</p>
+    </div>
+  </section>
+  
+  <section class="section" id="mission">
+    <div class="container">
+      <h2 class="section-title">Our Mission & Vision</h2>
+      <div class="mission-vision">
+        <div class="mission">
+          <h3>Our Mission</h3>
+          <p>SignBridge is dedicated to breaking communication barriers between sign language users and the hearing world. We believe that technology should empower everyone to communicate freely, regardless of language differences. Our mission is to create innovative solutions that make real-time, bi-directional translation between sign language and spoken/written language accessible to all.</p>
+        </div>
+        <div class="vision">
+          <h3>Our Vision</h3>
+          <p>We envision a world where communication barriers no longer exist, where technology serves as a bridge between different forms of language, and where accessibility is not an afterthought but a fundamental right. Through our cutting-edge applications and services, we aim to foster a more inclusive society where everyone can participate equally in all aspects of life.</p>
+        </div>
+      </div>
+      
+      <h2 class="section-title">Who We Serve</h2>
+      <div class="audience-card">
+        <h3>For Sign Language Users</h3>
+        <ul>
+          <li>Communicate by signing to a camera with the conversation converted into text</li>
+          <li>Learn English through interactive translation tools</li>
+          <li>Access educational content with sign language translations</li>
+        </ul>
+      </div>
+      <div class="audience-card">
+        <h3>For Non-Sign Language Users</h3>
+        <ul>
+          <li>Learn sign language through interactive lessons and tutorials</li>
+          <li>Communicate with sign language users using our translation tools</li>
+          <li>Access a comprehensive sign language dictionary with video demonstrations</li>
+        </ul>
+      </div>
+      <div class="audience-card">
+        <h3>For Accessibility</h3>
+        <ul>
+          <li>Overlay an AR version of the avatar during video calls or on recorded lectures</li>
+          <li>Access educational content with both spoken and sign language translations</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section section-light" id="features">
+    <div class="container">
+      <h2 class="section-title">Core Features</h2>
+      <div class="feature-grid">
+        <div class="feature-box">
+          <div class="feature-icon">🔄</div>
+          <h3>Real-Time Translation</h3>
+          <p>Our Audio-to-Sign feature captures audio from your device's microphone, converts it to text using advanced speech recognition services, processes the text using NLP, and animates our 3D avatar to display sign language gestures in real-time.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">📝</div>
+          <h3>Sign-to-Text Conversion</h3>
+          <p>Using your device's camera, our technology captures sign language gestures, processes them through computer vision and machine learning algorithms, and converts them into accurate text that can be further processed or shared.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">🔊</div>
+          <h3>Text-to-Sign Animation</h3>
+          <p>Type text and have it translated into sign language through our animated 3D avatar, making communication more accessible for sign language users.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">📱</div>
+          <h3>AR Avatar & Video Overlay</h3>
+          <p>Record class slides along with audio and overlay an AR version of our 3D avatar that translates the spoken content into sign language, enhancing accessibility in educational settings.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">📚</div>
+          <h3>Interactive Learning Modules</h3>
+          <p>Whether you're a sign language user learning English or someone wanting to learn sign language, our interactive lessons, vocabulary exercises, and quizzes make learning engaging and effective.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">🔍</div>
+          <h3>Sign Language Dictionary</h3>
+          <p>Access our comprehensive searchable database with video examples of sign language gestures, making it easier for users to look up and learn specific signs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section" id="technology">
+    <div class="container">
+      <h2 class="section-title">Our Technology</h2>
+      <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; color: #555; line-height: 1.7;">
+        SignBridge leverages cutting-edge technologies across multiple domains to deliver a seamless translation experience. 
+        Our architecture combines advanced AI, computer vision, 3D animation, and augmented reality to create a powerful platform.
+      </p>
+      
+      <div class="tech-info">
+        <div class="tech-column">
+          <div class="tech-card">
+            <h3>Front End Technologies</h3>
+            <h4>Web</h4>
+            <ul>
+              <li>React for user interface development</li>
+              <li>Three.js/Babylon.js for 3D rendering of avatars</li>
+              <li>WebXR for augmented reality experiences</li>
+              <li>MediaStream API for camera and microphone capture</li>
+            </ul>
+            
+            <h4>Mobile</h4>
+            <ul>
+              <li>React Native or Flutter with native camera support</li>
+              <li>ARCore for Android devices</li>
+              <li>ARKit for iOS devices</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="tech-column">
+          <div class="tech-card">
+            <h3>Back End Technologies</h3>
+            <h4>Server Framework</h4>
+            <ul>
+              <li>Node.js (Express) or Python (FastAPI/Django)</li>
+            </ul>
+            
+            <h4>Speech & Sign Processing</h4>
+            <ul>
+              <li>Google Cloud Speech-to-Text for audio transcription</li>
+              <li>NLP models for text-to-sign mapping</li>
+              <li>TensorFlow/PyTorch for sign language recognition</li>
+              <li>FFmpeg/OpenCV for video processing and AR overlay</li>
+            </ul>
+            
+            <h4>Data Storage</h4>
+            <ul>
+              <li>MongoDB or PostgreSQL for user data and content</li>
+              <li>Cloud storage for educational videos and animations</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section section-light" id="team">
+    <div class="container">
+      <h2 class="section-title">Our Team</h2>
+      <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; color: #555; line-height: 1.7;">
+        SignBridge is developed by a dedicated team of professionals passionate about creating technology that makes a positive impact on people's lives.
+      </p>
+      
+      <div class="team-members">
+        <div class="team-member">
+          <div class="member-avatar">B</div>
+          <h3>Beingana Brennan</h3>
+          <p>Project Lead & AI Specialist</p>
+          <div class="social-links">
+            <a href="#" class="social-link">in</a>
+            <a href="#" class="social-link">𝕏</a>
+          </div>
+        </div>
+        <div class="team-member">
+          <div class="member-avatar">M</div>
+          <h3>Muluya Hansel Kironde</h3>
+          <p>3D Animation & AR Developer</p>
+          <div class="social-links">
+            <a href="#" class="social-link">in</a>
+            <a href="#" class="social-link">𝕏</a>
+          </div>
+        </div>
+        <div class="team-member">
+          <div class="member-avatar">MP</div>
+          <h3>Mutuzo Priscilla Aligonza</h3>
+          <p>AI Specialist</p>
+          <div class="social-links">
+            <a href="#" class="social-link">in</a>
+            <a href="#" class="social-link">𝕏</a>
+          </div>  
+        </div>
+        <div class="team-member">
+          <div class="member-avatar">W</div>
+          <h3>Kokole Wahid</h3>
+          <p>AI Specialist</p>
+          <div class="social-links">
+            <a href="#" class="social-link">in</a>
+            <a href="#" class="social-link">𝕏</a>
+          </div>  
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to Break Communication Barriers?</h2>
+      <p>Join us in creating a more accessible world through technology. Start using SignBridge today to experience the power of real-time sign language translation.</p>
+      <a href="index.html#translate" class="btn">Start Translating Now</a>
+    </div>
+  </section>
+  
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>SignBridge</h3>
+          <p style="color: #bbb; margin-bottom: 20px;">Breaking communication barriers and making the world more accessible through technology.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html#translate">Translate</a></li>
+            <li><a href="index.html#learn">Learn</a></li>
+            <li><a href="about.html">About Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">API Reference</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <ul>
+            <li><a href="mailto:info@signbridge.com">info@signbridge.com</a></li>
+            <li><a href="#">+256 780 178 470</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 SignBridge. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
